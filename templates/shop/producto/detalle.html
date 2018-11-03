@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{%block carrusel %}
+
+{%endblock%}
+{% block derecha %}
+
+{% endblock %}
+{%block content%}
+	<!-- Single Product -->
+
+	<div class="single_product">
+		<div class="container">
+			<div class="row">
+
+				<!-- Images -->
+				<div class="col-lg-2 order-lg-1 order-2">
+					<ul class="image_list">
+                        {% for p in producto.imgprod.all %}
+                            {%if p.imagen %}
+						        <li data-image="{{p.imagen.url}}"><img src="{{p.imagen.url}}" alt=""></li>
+                            {%endif%}
+                        {%endfor%}
+					</ul>
+				</div>
+
+				<!-- Selected Image -->
+				<div class="col-lg-5 order-lg-2 order-1">
+                    {% if producto.imagen %}
+					<img class="card-img-top" src="{{producto.imagen.url}}" alt="{{producto.nombre}}">
+                    {% else %}
+					<img class="card-img-top" src="http://placehold.it/700x400" alt="{{producto.nombre}}">
+                    {% endif %}
+				</div>
+
+				<!-- Description -->
+				<div class="col-lg-5 order-3">
+					<div class="product_description">
+						<div class="product_category">{{producto.categoria.all.first}}</div>
+						<div class="product_name">{{producto.nombre}}</div>
+						<div class="product_text"><p>{{producto.descripcion}}</p></div>
+						<div class="order_info d-flex flex-row">
+							<form action="{% url 'cart:cart_add' producto.id %}" method="post">{% csrf_token %}
+								<div class="clearfix" style="z-index: 1000;">
+									<!-- Product Quantity -->
+									<div class="product_quantity clearfix">
+										<span>{{ cart_product_form.quantity.label }}</span>
+                                        {{cart_product_form.quantity}}
+									</div>
+
+								</div>
+								<div class="product_price">{{producto.precio}}</div>
+								<div class="button_container">
+									<button type="submit" class="button cart_button">Agregar al carrito</button>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+{%endblock%}

@@ -1,0 +1,108 @@
+{% load staticfiles %}
+{% load static %}
+{% load i18n static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Servin LGSM">
+
+    <title>{% block title %}{{context.titulo_principal}}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{%static 'css/shop-homepage.css' %}" rel="stylesheet">
+    <link href="{%static 'plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{%static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'styles/product_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'styles/product_responsive.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'plugins/slick-1.8.0/slick.css' %}">
+    {% block extrastatic %}
+	{% endblock %}
+
+    {% block extrahead %}
+    {% endblock %}
+  </head>
+
+  <body>
+  <div class="super_container">
+
+    {% block navbar %}
+        {% if user.is_authenticated %}
+            {% include 'base/navbar.html' %}
+        {% endif %}
+    {% endblock %}
+
+    <!-- Page Content -->
+    <div class="container">
+      {%block supercontent%}
+      <div class="row">
+        {% if user.is_authenticated %}
+          {% block derecha %}
+            {% include 'base/derecha.html' %}
+          {% endblock %}
+        {% endif %}
+        <div class="col-lg-9">
+
+        {% if user.is_authenticated %}
+          {%block carrusel %}
+            {% include 'base/carrusel.html' %}
+          {%endblock%}
+        {% endif %}
+          <div class="row">
+            {% if user.is_authenticated %}
+              {%include 'base/lista_productos.html' %}
+            {% endif %}
+          </div>
+            {%block content %}
+            {%endblock%}
+          <!-- /.row -->
+        </div>
+        <!-- /.col-lg-9 -->
+      </div>
+      <!-- /.row -->
+      {%endblock%}
+    </div>
+    <!-- /.container -->
+    <!-- caracteristicas -->
+    {% if user.is_authenticated %}
+      {%include 'base/caracteristicas.html' %}
+    {% endif %}
+
+    <!-- Footer -->
+    <footer class="py-2 bg-dark">
+      <div class="container">
+        <a href="http://www.servinlgsm.com.ar/"><p class="m-0 text-center text-white">Copyright &copy; Servin LGSM</p></a>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{%static 'js/jquery-3.3.1.min.js' %}"></script>
+
+    <script src="{%static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{%static 'styles/bootstrap4/popper.js' %}"></script>
+    <script src="{%static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+    <script src="{%static 'plugins/greensock/TweenMax.min.js' %}"></script>
+    <script src="{%static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+    <script src="{%static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+    <script src="{%static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+    <script src="{%static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+    <script src="{%static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+    <script src="{%static 'plugins/easing/easing.js' %}"></script>
+    <script src="{%static 'js/product_custom.js' %}"></script>
+</div>
+  </body>
+
+</html>

@@ -1,0 +1,11 @@
+<div class="col-lg-3">
+
+  <h2 class="my-4">Categorias</h2>
+  <div class="list-group">
+      {% for categoria in categorias %}
+        <a href="{{categoria.get_absolute_url}}" class="list-group-item">{{categoria.nombre}}</a>
+      {% endfor %}
+  </div>
+
+</div>
+<!-- /.col-lg-3 -->

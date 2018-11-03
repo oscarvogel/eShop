@@ -1,0 +1,73 @@
+{% load staticfiles %}
+{% load static %}
+{% load i18n static %}
+<header class="header">
+    <!-- Top Bar -->
+		<div class="top_bar">
+			<div class="container">
+				<div class="row">
+					<div class="col d-flex flex-row">
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{% static 'images/phone.png'%}" alt="">
+                        </div><a href="tel:(03743) - 422227 - 420873  +54 9 3743 41  6461">(03743) - 422227 - 420873  +54 9 3743 41     6461</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{% static 'images/mail.png' %}" alt=""></div><a href="mailto:ventas@electrotecniref.com.ar">ventas@electrotecniref.com.ar</a></div>
+						<div class="top_bar_content ml-auto">
+							<div class="top_bar_menu">
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{% include 'base/header.html' %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{{context.web_empresa}}">{{context.nombre_sitio}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+              <div class="list-group">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'inicio' %}">Inicio
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+            </li>
+            {% if user.is_authenticated %}
+              {% if user.is_staff %}
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administracion
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{%url 'logout'%}">Cerrar Sesion</a>
+                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+              {%else%}
+                <li class="nav-item">
+                  <a class="nav-link" href="{%url 'logout'%}">Cerrar</a>
+                </li>
+              {%endif%}
+            {%else%}
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'login'%}">Login</a>
+            </li>
+            {%endif%}
+          </ul>
+        </div>
+      </div>
+      </div>
+    </nav>
+</header>

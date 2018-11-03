@@ -1,0 +1,62 @@
+{%if busqueda %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Detalle</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for producto in productos%}
+            <tr>
+                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{producto.id}}" >
+                <i class="fas fa-images"></i>
+                </button>
+                    <div id="myModal{{producto.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                {%if producto.imagen%}
+                                    <img src="{{producto.imagen.url}}" class="card-img-top" alt="{{producto.nombre}}">
+                                {%else%}
+                                    <img class="card-img-top" src="http://placehold.it/700x400" alt="{{producto.nombre}}">
+                                {%endif%}
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </td>
+                <td><a href="{{producto.get_absolute_url}}">{{producto.nombre}}</a></td>
+                <td>${{producto.precio}}</td>
+                <td>{{producto.stock}}</td>
+                <td></td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+{% else %}
+    {%for producto in productos%}
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+              {%if producto.imagen%}
+              <a href="{{producto.get_absolute_url}}"><img class="card-img-top" src="{{producto.imagen.url}}" alt="{{producto.nombre}}"></a>
+              {%else%}
+                <a href="{{producto.get_absolute_url}}"><img class="card-img-top" src="http://placehold.it/700x400" alt="{{producto.nombre}}"></a>
+              {%endif%}
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="{{producto.get_absolute_url}}">{{producto.nombre}}</a>
+              </h4>
+              <h5>${{producto.precio}}</h5>
+              <p class="card-text">{{producto.descripcion}}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Stock {{producto.stock}}</small>
+            </div>
+          </div>
+        </div>
+    {%endfor%}
+{% endif %}

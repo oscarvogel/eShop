@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1>ElectroTecniRef</h1>
+    <p>Orden Nº {{ orden.id }}</br>
+        <span class="secondary">{{ orden.creada|date:"d M Y" }}</span>
+    </p>
+    <h3>Enviar a:</h3>
+    <p>
+        {{ order.usuario }}<br>
+        {{ orden.usuario.email }}<br>
+        {{ order.domicilio }}<br>
+        {{ order.cp }}
+    </p>
+    <h3>Items</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in orden.items.all %}
+            <tr class="row{% cycle '1' '2' %}">
+                <td>{{ item.producto.nombre }}</td>
+                <td class="num">${{ item.precio }}</td>
+                <td class="num">{{ item.cantidad }}</td>
+                <td class="num">${{ item.get_cost }}</td>
+            </tr>
+        {% endfor %}
+        <tr class="total">
+            <td colspan="3">Total</td>
+            <td class="num">${{ order.get_total_cost }}</td>
+        </tr>
+    </tbody>
+    </table>
+    <span class="{% if order.pagada %}pagada{% else %}pendiente{% endif %}">
+        {% if order.paid %}Pagada{% else %}Pendiente de pago{% endif %}
+    </span>
+</body>
+</html>

@@ -1,0 +1,26 @@
+          <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+            <ol class="carousel-indicators">
+                {%for img in imgportada%}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
+                {%endfor%}
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              {%for img in imgportada%}
+                <div class="carousel-item {% if forloop.first %}active{%endif%}">
+                    {%if img.imagen%}
+                        <img class="d-block img-fluid" src="{{img.imagen.url}}" alt="{{img.descripcion}}">
+                    {%else%}
+                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+                    {%endif%}
+                  </div>
+              {%endfor%}
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          </div>
